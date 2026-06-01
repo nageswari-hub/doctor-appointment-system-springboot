@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Doctor Booking Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="nav-logo">Your Health, Our Priority</a>
+    <ul class="nav-menu">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#features">Services</a></li>
+      <li><a href="doctors.html" target="_blank">Our Doctors</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li id="user-greeting" style="color:white;font-weight:500;"></li>
+      <li id="auth-btn">
+        <a href="login.html" id="login-link">Login</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h1>Your Health, Our Priority</h1>
+    <p>Book appointments, connect with top doctors, and manage your healthcare easily — all in one place.</p>
+    <div class="hero-buttons">
+      <a href="#" onclick="openDoctors()" class="btn">Find Doctors</a>
+      <a href="booking.html" class="btn-secondary">Book Appointment</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <h2 class="section-title">Key Features</h2>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <h3>Easy Booking</h3>
+        <p>Book your appointment online with just a few clicks.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Expert Doctors</h3>
+        <p>Connect with top-rated, verified medical professionals.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Secure Feedback</h3>
+        <p>Share your experience safely and securely with your doctor.</p>
+      </div>
+      <div class="feature-card">
+        <h3>24/7 Access</h3>
+        <p>Book, manage, and connect anytime, from anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:support@mediconnect.com">support@mediconnect.com</a></p>
+    <p>Phone: +91 9876543210</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 MediConnect. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function openDoctors() {
+      window.open("doctors.html", "_blank"); // Opens your doctors list page in new tab
+    }
+  </script>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+  // Dynamically handle navbar auth state
+  const authBtn = document.getElementById("auth-btn");
+  const userGreeting = document.getElementById("user-greeting");
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      userGreeting.textContent = `👋 Welcome, ${user.email}`;
+      authBtn.innerHTML = `<a href="#" onclick="logoutUser()">Logout</a>`;
+    } else {
+      userGreeting.textContent = "";
+      authBtn.innerHTML = `<a href="login.html">Login</a>`;
+    }
+  });
+</script>
+
+</body>
+</html>
